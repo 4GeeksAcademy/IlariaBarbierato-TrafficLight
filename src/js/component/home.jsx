@@ -1,24 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 
-//include images into your bundle
-import rigoImage from "../../img/rigo-baby.jpg";
-
-//create your first component
-const Home = () => {
+function Home() {
+	const [glowing, setGlowing] = useState('red');
+	const [purpleLight, setPurpleLight] = useState("false");
 	return (
-		<div className="text-center">
-			<h1 className="text-center mt-5">Hello Rigo!</h1>
-			<p>
-				<img src={rigoImage} />
-			</p>
-			<a href="#" className="btn btn-success">
-				If you see this green button... bootstrap is working...
-			</a>
-			<p>
-				Made by{" "}
-				<a href="http://www.4geeksacademy.com">4Geeks Academy</a>, with
-				love!
-			</p>
+		<div>
+			<div className="d-flex justify-content-center mt-5">
+				<button type="button" className="btn btn-primary mx-1" onClick={() => {
+					if (purpleLight === "false") {
+						if (glowing === "purple"){setGlowing("green")}
+						if (glowing === "red"){setGlowing("green")}
+						if (glowing === "green"){setGlowing("yellow")}
+						if (glowing === "yellow"){setGlowing("red")}
+					}
+					else {
+						if (glowing === "red"){setGlowing("purple")}
+						if (glowing === "purple"){setGlowing("green")}
+						if (glowing === "green"){setGlowing("yellow")}
+						if (glowing === "yellow"){setGlowing("red")}
+					}
+					}}>
+					Change color light
+				</button>
+				<button type="button" className="btn btn-primary mx-1" onClick={() => 
+				{purpleLight === "false" ? setPurpleLight("true") : setPurpleLight("false")}}>
+					Add purple light
+				</button>
+			</div>
+			<div className={(purpleLight === "false" ? "traffic" : "trafficPurpleLight")}>
+				<div className={"lamp " + (glowing === "red" ? "red glowingRed" : "redTenue")} onClick={() => setGlowing("red")}></div>
+				<div className={"lamp " + (glowing === "yellow" ? "yellow glowingYellow" : "yellowTenue")} onClick={() => setGlowing("yellow")}></div>
+				<div className={"lamp " + (glowing === "green" ? "green glowingGreen" : "greenTenue")} onClick={() => setGlowing("green")}></div>
+				<div className={(purpleLight === "true" ? ("lamp " + (glowing === "purple" ? "purple glowingPurple" : "purpleTenue")) : "" )} onClick={() => setGlowing("purple")}></div>
+				<div className="poste"></div>
+			</div>
 		</div>
 	);
 };
